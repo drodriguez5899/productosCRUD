@@ -7,11 +7,13 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.ProductosCRUD;
+import modelo.Productos;
 
 /**
  *
@@ -32,8 +34,9 @@ public class servletProductos extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        ProductosCRUD.destroyProducto(3);
         try {
-            ProductosCRUD.destroyProducto(3);
+           
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -42,6 +45,18 @@ public class servletProductos extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet servletProductos at " + request.getContextPath() + "</h1>");
+            List<Productos> misProductos = ProductosCRUD.getProductos();
+            for(Productos p: misProductos){
+                out.println(p.getNombre());
+            }
+            Productos miproducto = new Productos();
+            miproducto.setId(11);
+            miproducto.setNombre("tarta de fresa");
+            miproducto.setImagen("tartaf.jpg");
+            miproducto.setCategoria("postres");
+            miproducto.setPrecio(6.0f);
+            //ProductosCRUD.actualizaProducto(miproducto);
+            ProductosCRUD.insertaProducto();
             out.println("</body>");
             out.println("</html>");
         } finally {

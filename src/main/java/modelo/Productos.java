@@ -43,17 +43,17 @@ public class Productos implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 0, max = 45)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 0, max = 60)
     @Column(name = "imagen")
     private String imagen;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 0, max = 40)
     @Column(name = "categoria")
     private String categoria;
     @Basic(optional = false)
