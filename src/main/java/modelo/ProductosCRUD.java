@@ -16,6 +16,7 @@ import javax.persistence.Query;
  * @author David
  */
 public class ProductosCRUD {
+    
        public static int destroyProducto(int id) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.mycompany_CRUDproductos_war_1.0-SNAPSHOTPU");
         EntityManager manager = factory.createEntityManager();
@@ -78,7 +79,7 @@ public class ProductosCRUD {
         manager.getTransaction().begin();
         int filasAfectadas = q.executeUpdate();
         manager.getTransaction().commit();
-        //manager.close();
+        manager.close();
         return filasAfectadas;      
     }
     
