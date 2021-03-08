@@ -20,6 +20,7 @@ import modelo.Productos;
  * @author David
  */
 public class servletProductos extends HttpServlet {
+    private int id;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,6 +74,31 @@ public class servletProductos extends HttpServlet {
                     out.println("<h1>Registro Borrado " + "<a href='index.jsp'>Volver</a>" + "</h1>");
                 }
             }
+            
+            if ( op.equals("update1")) {
+                id = Integer.parseInt(request.getParameter("id"));
+                Productos miProducto = ProductosCRUD.getProducto(id);
+                request.setAttribute("miProducto", miProducto);
+                request.getRequestDispatcher("update.jsp").forward(request, response);
+            }
+            if ( op.equals("update2")) {
+                String nombre = request.getParameter("nombre");
+                String imagen = request.getParameter("imagen");
+                String categoria = request.getParameter("categoria");
+                float precio = Float.parseFloat(request.getParameter("precio"));
+                Productos miProducto = new Productos(id,nombre,imagen,categoria,precio);
+                int filas = ProductosCRUD.actualizaProducto(miProducto);
+                String mensaje ="Producto actualizado";
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("miProducto", miProducto);
+                request.getRequestDispatcher("update.jsp").forward(request, response);
+                //out.println("<h3>" + filas + "  fila actualizadas </h3>");
+                
+                /*   request.setAttribute("miProducto", miProducto);
+                request.getRequestDispatcher("update.jsp").forward(request, response);*/
+            }
+            
+            
 
 
             /*
